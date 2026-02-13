@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>恋愛コミュニケーション診断</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-50 to-purple-50 min-h-screen">
+    <!-- トップページ -->
+    <div id="homePage" class="flex items-center justify-center min-h-screen p-4">
+        <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center fade-in">
+            <div class="mb-6">
+                <div class="text-4xl mb-4">💕🎵🔧💕🛡️</div>
+                <h1 class="text-3xl font-bold text-gray-800 mb-4">
+                    恋愛コミュニケーション診断
+                </h1>
+                <p class="text-gray-600 mb-4">
+                    20問で分かる！あなたの恋愛キャラは？
+                </p>
+                <div class="bg-pink-50 rounded-lg p-4 mb-4">
+                    <p class="text-sm text-pink-600 font-medium">
+                        🎯 診断結果は推しキャラになれる！<br>
+                        📱 シェアで盛り上がろう！<br>
+                        💕 あなたに似たタイプが集まる場所
+                    </p>
+                </div>
+            </div>
+            <button onclick="startDiagnosis()" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 mb-3">
+                🎭 診断を始める
+            </button>
+            <p class="text-xs text-gray-500">
+                #恋愛診断 #推しキャラ #わかる人集まれ
+            </p>
+        </div>
+    </div>
+
+    <!-- 診断ページ -->
+    <div id="diagnosisPage" class="hidden">
+        <div class="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center p-4">
+            <div class="max-w-2xl w-full bg-white rounded-lg shadow-lg p-8 fade-in">
+                <!-- 進捗表示 -->
+                <div class="mb-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm text-gray-600">
+                            質問 <span id="currentQuestion">1</span> / 20
+                        </span>
+                        <span class="text-sm text-gray-600">
+                            カテゴリ: <span id="currentCategory">LAT</span>
+                        </span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div id="progressBar" class="bg-pink-500 h-2 rounded-full transition-all duration-300" style="width: 5%"></div>
+                    </div>
+                </div>
+
+                <!-- 質問文 -->
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                        Q<span id="questionNumber">1</span>
+                    </h2>
+                    <p id="questionText" class="text-lg text-gray-700 leading-relaxed">
+                        質問文がここに表示されます
+                    </p>
+                </div>
+
+                <!-- 回答ボタン -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <button id="yesButton" onclick="answer(true)" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200">
+                        YES
+                    </button>
+                    <button id="noButton" onclick="answer(false)" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200">
+                        NO
+                    </button>
+                </div>
+
+                <!-- 戻るボタン -->
+                <button id="backButton" onclick="goBack()" class="hidden w-full bg-gray-300 hover:bg-gray-400 text-gray-700 font-medium py-2 px-4 rounded-lg transition-colors duration-200">
+                    前の質問に戻る
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 結果ページ -->
+    <div id="resultPage" class="hidden">
+        <div class="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 py-8 px-4">
+            <div class="max-w-2xl mx-auto">
+                <!-- キャラクターカード -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-6 text-center fade-in">
+                    <div class="mb-6">
+                        <div id="characterEmoji" class="text-6xl mb-4">🎵</div>
+                        <h1 id="characterName" class="text-3xl font-bold mb-2">キャラクター名</h1>
+                        <h2 id="resultType" class="text-xl font-bold text-gray-600 mb-4">
+                            タイプ名
+                        </h2>
+                        <p id="resultDescription" class="text-gray-600 leading-relaxed mb-4">
+                            説明文
+                        </p>
+                        <div class="bg-pink-50 rounded-lg p-4 mb-4">
+                            <p id="characterCatchphrase" class="text-lg font-medium text-pink-600 italic">
+                                "キャッチフレーズ"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- キャラクター詳細 -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-6 fade-in">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        🎭 キャラクター詳細
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <span class="font-medium text-gray-700">性格：</span>
+                            <p id="characterPersonality" class="text-gray-600">性格説明</p>
+                        </div>
+                        <div>
+                            <span class="font-medium text-gray-700">恋愛スタイル：</span>
+                            <p id="characterLoveStyle" class="text-gray-600">恋愛スタイル説明</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- スコア表示 -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-6 fade-in">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">
+                        📊 通信プロトコル分析
+                    </h3>
+                    <div id="scoreBars"></div>
+                </div>
+
+                <!-- アドバイス -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-6 fade-in">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">
+                        💡 恋愛通信改善パッチ
+                    </h3>
+                    <ul id="adviceList" class="space-y-3"></ul>
+                </div>
+
+                <!-- SNSシェア -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-6 fade-in">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        📱 シェアして推しを広げよう！
+                    </h3>
+                    <textarea id="shareText" readonly class="w-full p-4 border border-gray-300 rounded-lg text-sm bg-gray-50" rows="6"></textarea>
+                    <div class="mt-4 flex gap-2">
+                        <button onclick="copyShareText()" class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
+                            📋 コピー
+                        </button>
+                        <button onclick="shareOnTwitter()" class="flex-1 bg-sky-500 hover:bg-sky-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
+                            🐦 Xでシェア
+                        </button>
+                    </div>
+                </div>
+
+                <!-- アクションボタン -->
+                <div class="text-center fade-in">
+                    <button onclick="resetDiagnosis()" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
+                        🔄 もう一度診断する
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 診断データ
+        const questions = [
+            // LAT（通信速度）
+            { id: 1, text: '返信が24時間以上あくことがよくあるか？', category: 'LAT' },
+            { id: 2, text: 'こちらが即レスしても相手のペースは変わらないか？', category: 'LAT' },
+            { id: 3, text: '深夜・早朝の非常識な連絡は来ないか？', category: 'LAT' },
+            { id: 4, text: 'SNSは更新しているのにLINEは未読スルーがあるか？', category: 'LAT' },
+            
+            // ACK（言葉・反応）
+            { id: 5, text: '変化に気づくが「褒め言葉」は少ないか？', category: 'ACK' },
+            { id: 6, text: '写真やエピソードにスタンプ1個で終わるか？', category: 'ACK' },
+            { id: 7, text: '相談に対して共感より「解決策」が先に来るか？', category: 'ACK' },
+            { id: 8, text: '自分から言わない限り「好き」などの言葉はないか？', category: 'ACK' },
+            { id: 9, text: '喧嘩の際、謝るよりも「理屈」を並べるか？', category: 'ACK' },
+            
+            // SYN（行動・同期）
+            { id: 10, text: '私物を貸す、送り迎えなどのサポートはあるか？', category: 'SYN' },
+            { id: 11, text: '退勤時間を合わせるなど、近くにいようとするか？', category: 'SYN' },
+            { id: 12, text: '行きたい場所をしっかり予約してくれるか？', category: 'SYN' },
+            { id: 13, text: '旅行のお土産をわざわざ買ってきてくれるか？', category: 'SYN' },
+            
+            // ERR（エラー回避）
+            { id: 14, text: '真面目な話をしようとすると話題を逸らすか？', category: 'ERR' },
+            { id: 15, text: '「話し合いたい」と言うと動揺・フリーズするか？', category: 'ERR' },
+            { id: 16, text: '機嫌を損ねると理由を言わず引きこもるか？', category: 'ERR' },
+            
+            // CON（接続目的）
+            { id: 17, text: '連絡は基本的に用件がある時だけか？', category: 'CON' },
+            { id: 18, text: '「今何してる？」といった雑談LINEは来ないか？', category: 'CON' },
+            { id: 19, text: '複数人の場には来るが、サシには慎重か？', category: 'CON' },
+            { id: 20, text: '表情や態度から考えていることが読み取れないか？', category: 'CON' },
+        ];
+
+        let currentQuestionIndex = 0;
+        let answers = [];
+
+        // ページ表示制御
+        function showPage(pageId) {
+            document.querySelectorAll('[id$="Page"]').forEach(page => {
+                page.classList.add('hidden');
+            });
+            document.getElementById(pageId).classList.remove('hidden');
+        }
+
+        // 診断開始
+        function startDiagnosis() {
+            console.log('診断開始ボタンがクリックされました');
+            currentQuestionIndex = 0;
+            answers = [];
+            console.log('診断ページに移動します');
+            showPage('diagnosisPage');
+            updateQuestion();
+        }
+
+        // 質問更新
+        function updateQuestion() {
+            console.log('質問を更新します。現在のインデックス:', currentQuestionIndex);
+            const question = questions[currentQuestionIndex];
+            console.log('質問データ:', question);
+            
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('currentCategory').textContent = question.category;
+            document.getElementById('questionNumber').textContent = question.id;
+            document.getElementById('questionText').textContent = question.text;
+            
+            // 進捗バー更新
+            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            // 戻るボタン表示制御
+            const backButton = document.getElementById('backButton');
+            if (currentQuestionIndex > 0) {
+                backButton.classList.remove('hidden');
+            } else {
+                backButton.classList.add('hidden');
+            }
+            
+            // ボタンリセット
+            document.getElementById('yesButton').disabled = false;
+            document.getElementById('noButton').disabled = false;
+        }
+
+        // 回答処理
+        function answer(isYes) {
+            answers.push(isYes);
+            
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                updateQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        // 戻る
+        function goBack() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                answers.pop();
+                updateQuestion();
+            }
+        }
+
+        // スコア計算
+        function getScores() {
+            const scores = { LAT: 0, ACK: 0, SYN: 0, ERR: 0, CON: 0 };
+            
+            answers.forEach((answer, index) => {
+                if (answer && index < questions.length) {
+                    const category = questions[index].category;
+                    scores[category]++;
+                }
+            });
+            
+            return scores;
+        }
+
+        // タイプ判定
+        function getDiagnosisType() {
+            const q1 = answers[0]; // 独立マイペース型
+            const q17 = answers[16];
+            const q18 = answers[17];
+            
+            const q2 = answers[1]; // 実践・誠実型
+            const q10 = answers[9];
+            const q12 = answers[11];
+            
+            const q4 = answers[3]; // 共感・密着型
+            const q1_no = !answers[0];
+            
+            const q14 = answers[13]; // 回避・不安定型
+            const q16 = answers[15];
+
+            // 優先順位：回避→共感→独立→実践
+            if (q1 && q14 && q16) return 'avoidant';
+            if (q1_no && q4 && q17) return 'empathetic';
+            if (q1 && q17 && q18) return 'independent';
+            if (q2 && q10 && q12) return 'practical';
+            
+            return 'unclassified';
+        }
+
+        // キャラクター情報取得
+        function getCharacterInfo(type) {
+            const characters = {
+                independent: {
+                    name: 'ユウト',
+                    emoji: '🎵',
+                    color: '#3B82F6',
+                    personality: 'マイペースで自由人。音楽が好きで、一人の時間を大切にする。',
+                    catchphrase: 'まあ、気楽にいこうよ！',
+                    loveStyle: '連絡は少なめでも、会うときは全力で楽しむタイプ',
+                    twitterBio: '🎵 音信不通だけど好きだよ｜マイペース恋愛担当',
+                    hashtags: ['#マイペース彼氏', '#自由人恋愛', '#連絡下手']
+                },
+                practical: {
+                    name: 'ケンジ',
+                    emoji: '🔧',
+                    color: '#10B981',
+                    personality: '実直で誠実。言葉より行動で示すタイプ。',
+                    catchphrase: '何か困ったことがあったら言ってね',
+                    loveStyle: 'プレゼントや手伝いなど、具体的な行動で愛情を表現',
+                    twitterBio: '🔧 言葉より行動で好きを伝える｜実直担当',
+                    hashtags: ['#実直彼氏', '#行動派恋愛', '#誠実さん']
+                },
+                empathetic: {
+                    name: 'ハル',
+                    emoji: '💕',
+                    color: '#EC4899',
+                    personality: '感情豊かで共感力が高い。スキンシップが好き。',
+                    catchphrase: '今の気持ち、教えてくれると嬉しいな',
+                    loveStyle: '毎日の連絡と感情の共有を大切にする甘えん坊タイプ',
+                    twitterBio: '💕 毎日連絡してほしい｜共感担当',
+                    hashtags: ['#甘えん坊彼氏', '#共感さん', '#濃厚愛']
+                },
+                avoidant: {
+                    name: 'リョウ',
+                    emoji: '🛡️',
+                    color: '#6B7280',
+                    personality: 'シャイで慎重。衝突を避ける平和主義者。',
+                    catchphrase: 'また今度でいいかな…',
+                    loveStyle: '喧嘩を避けて、穏やかな関係を保とうとする',
+                    twitterBio: '🛡️ 喧嘩は嫌いだな…｜回避担当',
+                    hashtags: ['#シャイ彼氏', '#喧嘩嫌い', '#平和主義']
+                }
+            };
+            return characters[type] || characters.independent;
+        }
+
+        // タイプ情報取得
+        function getTypeInfo(type) {
+            const types = {
+                independent: {
+                    name: '独立マイペース型',
+                    description: '自分のペースを大切にし、束縛を嫌うタイプ。連絡は少なめでも好意はある。'
+                },
+                practical: {
+                    name: '実践・誠実型',
+                    description: '行動で愛情を示すタイプ。言葉より実践的なサポートで気持ちを表現する。'
+                },
+                empathetic: {
+                    name: '共感・密着型',
+                    description: '感情の共有を重視するタイプ。密なコミュニケーションを求める。'
+                },
+                avoidant: {
+                    name: '回避・不安定型',
+                    description: '衝突を避け、感情的な話題から逃げるタイプ。安定関係を築くのが課題。'
+                },
+                unclassified: {
+                    name: '未分類（調整中）',
+                    description: '特徴がはっきりしないタイプ。より詳細な分析が必要。'
+                }
+            };
+            return types[type] || types.unclassified;
+        }
+
+        // アドバイス取得
+        function getAdvice(type) {
+            const baseAdvice = [
+                '「表情」ではなく「履歴」を信じる（行動ログ重視）',
+                '「感情」ではなく「お願い」で伝える（具体的リクエスト）',
+                '「連絡」＝「愛情」ではない（返信速度と好意を切り離す）'
+            ];
+
+            // タイプ別にアドバイスを並び替える（仮実装）
+            switch (type) {
+                case 'independent':
+                    return [baseAdvice[2], baseAdvice[0], baseAdvice[1]];
+                case 'practical':
+                    return [baseAdvice[0], baseAdvice[1], baseAdvice[2]];
+                case 'empathetic':
+                    return [baseAdvice[1], baseAdvice[2], baseAdvice[0]];
+                case 'avoidant':
+                    return [baseAdvice[1], baseAdvice[0], baseAdvice[2]];
+                default:
+                    return baseAdvice;
+            }
+        }
+
+        // 結果表示
+        function showResult() {
+            const type = getDiagnosisType();
+            const typeInfo = getTypeInfo(type);
+            const character = getCharacterInfo(type);
+            const scores = getScores();
+            const advice = getAdvice(type);
+
+            // キャラクター情報を表示
+            document.getElementById('characterEmoji').textContent = character.emoji;
+            document.getElementById('characterName').textContent = character.name;
+            document.getElementById('characterName').style.color = character.color;
+            document.getElementById('resultType').textContent = typeInfo.name;
+            document.getElementById('resultDescription').textContent = typeInfo.description;
+            
+            // キャラクター詳細
+            document.getElementById('characterPersonality').textContent = character.personality;
+            document.getElementById('characterCatchphrase').textContent = `"${character.catchphrase}"`;
+            document.getElementById('characterLoveStyle').textContent = character.loveStyle;
+
+            // スコアバー生成
+            const scoreBars = document.getElementById('scoreBars');
+            const maxScores = { LAT: 4, ACK: 5, SYN: 4, ERR: 3, CON: 4 };
+            
+            scoreBars.innerHTML = Object.entries(scores).map(([category, score]) => `
+                <div class="mb-4">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-medium text-gray-700">${category}（${getCategoryName(category)}）</span>
+                        <span class="text-sm text-gray-600">${score}/${maxScores[category]}</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3">
+                        <div class="bg-gradient-to-r from-pink-400 to-purple-500 h-3 rounded-full transition-all duration-500" 
+                             style="width: ${(score / maxScores[category]) * 100}%"></div>
+                    </div>
+                </div>
+            `).join('');
+
+            // アドバイスリスト生成
+            const adviceList = document.getElementById('adviceList');
+            adviceList.innerHTML = advice.map((item, index) => `
+                <li class="flex items-start">
+                    <span class="flex-shrink-0 w-6 h-6 bg-pink-500 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5">
+                        ${index + 1}
+                    </span>
+                    <span class="text-gray-700 leading-relaxed">${item}</span>
+                </li>
+            `).join('');
+
+            // SNSシェア用テキスト生成
+            const shareText = `【恋愛コミュニケーション診断】\n私のタイプは${typeInfo.name}！\n推しキャラは${character.name}${character.emoji}\n${character.catchphrase}\n\n${character.twitterBio}\n${character.hashtags.join(' ')}`;
+            document.getElementById('shareText').value = shareText;
+
+            showPage('resultPage');
+        }
+
+        // カテゴリ名取得
+        function getCategoryName(category) {
+            const names = {
+                LAT: '通信速度',
+                ACK: '言葉・反応',
+                SYN: '行動・同期',
+                ERR: 'エラー回避',
+                CON: '接続目的'
+            };
+            return names[category] || category;
+        }
+
+        // リセット
+        function resetDiagnosis() {
+            showPage('homePage');
+        }
+
+        // SNSシェア機能
+        function copyShareText() {
+            const shareText = document.getElementById('shareText');
+            shareText.select();
+            document.execCommand('copy');
+            
+            // コピー完了のフィードバック
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = '✅ コピー完了！';
+            button.classList.add('bg-green-500', 'hover:bg-green-600');
+            button.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('bg-green-500', 'hover:bg-green-600');
+                button.classList.add('bg-blue-500', 'hover:bg-blue-600');
+            }, 2000);
+        }
+
+        function shareOnTwitter() {
+            const shareText = document.getElementById('shareText').value;
+            const encodedText = encodeURIComponent(shareText);
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodedText}`;
+            window.open(twitterUrl, '_blank', 'width=600,height=400');
+        }
+    </script>
+</body>
+</html>

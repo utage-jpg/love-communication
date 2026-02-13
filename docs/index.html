@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>うらないの森 - 診断ポータルサイト</title>
+    <meta name="description" content="心を開く、自分を知る、未来を見つける">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -20,121 +21,296 @@
         }
         .header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
         }
         .title {
-            font-size: 3rem;
+            font-size: 4rem;
             font-weight: bold;
             background: linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 1rem;
+            animation: fadeIn 1s ease-in;
         }
         .subtitle {
             font-size: 1.5rem;
             color: #666;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-in 0.2s;
+        }
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            border-radius: 2rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            animation: fadeIn 1s ease-in 0.4s;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
         .diagnosis-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
         .diagnosis-card {
             background: white;
-            border-radius: 1rem;
+            border-radius: 1.5rem;
             padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
             text-decoration: none;
             color: inherit;
+            animation: fadeInUp 0.6s ease-out;
         }
         .diagnosis-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
         .diagnosis-header {
-            height: 120px;
-            background: linear-gradient(135deg, #ec4899, #8b5cf6);
-            border-radius: 0.5rem;
+            height: 140px;
+            border-radius: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .diagnosis-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
         .diagnosis-title {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: #333;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
         .diagnosis-desc {
             color: #666;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
         .diagnosis-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 0.875rem;
-            color: #999;
+        }
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: bold;
+            font-size: 0.75rem;
         }
         .available {
-            color: #10b981;
+            background: #10b981;
+            color: white;
         }
         .coming-soon {
-            color: #6b7280;
+            background: #6b7280;
+            color: white;
+        }
+        .trending {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #ef4444, #f59e0b);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
         }
         .footer {
             text-align: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
             color: #666;
             border-top: 1px solid #e5e7eb;
-            margin-top: 3rem;
+            margin-top: 4rem;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .floating-emoji {
+            position: absolute;
+            animation: float 3s ease-in-out infinite;
+        }
+        .floating-emoji:nth-child(1) { top: 2rem; left: 2rem; animation-delay: 0s; }
+        .floating-emoji:nth-child(2) { top: 1rem; right: 3rem; animation-delay: 1s; }
+        .floating-emoji:nth-child(3) { bottom: 2rem; left: 3rem; animation-delay: 2s; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
+            <div class="floating-emoji">💕</div>
+            <div class="floating-emoji">🌟</div>
+            <div class="floating-emoji">💝</div>
+            
             <h1 class="title">🌟 うらないの森</h1>
             <p class="subtitle">心を開く、自分を知る、未来を見つける</p>
+            
+            <a href="#diagnoses" class="cta-button">
+                <span>✨</span>
+                <span style="margin: 0 0.5rem;">診断をはじめる</span>
+                <span>→</span>
+            </a>
         </header>
 
-        <main>
+        <main id="diagnoses">
+            <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">
+                🎭 診断一覧
+            </h2>
+            
             <div class="diagnosis-grid">
                 <!-- 恋愛コミュニケーション診断 -->
-                <a href="../index.html" class="diagnosis-card">
-                    <div class="diagnosis-header">💕</div>
+                <a href="diagnosis.html" class="diagnosis-card">
+                    <div class="diagnosis-header" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">
+                        <span>💕</span>
+                    </div>
+                    <div class="trending">🔥 人気</div>
                     <h3 class="diagnosis-title">恋愛コミュニケーション診断</h3>
-                    <p class="diagnosis-desc">20問で分かる！あなたの恋愛キャラは？</p>
+                    <p class="diagnosis-desc">20問で分かる！あなたの恋愛キャラは？推しキャラになれる診断で、SNSで盛り上がろう！</p>
                     <div class="diagnosis-meta">
-                        <span class="available">✅ 利用可能</span>
+                        <span class="badge available">✅ 利用可能</span>
                         <span>約5分で完了</span>
                     </div>
                 </a>
 
                 <!-- 性格カラー診断 -->
                 <div class="diagnosis-card" style="opacity: 0.7; cursor: not-allowed;">
-                    <div class="diagnosis-header" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);">🎨</div>
+                    <div class="diagnosis-header" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);">
+                        <span>🎨</span>
+                    </div>
                     <h3 class="diagnosis-title">性格カラー診断</h3>
-                    <p class="diagnosis-desc">あなたの内面を彩るパーソナルカラー</p>
+                    <p class="diagnosis-desc">あなたの内面を彩るパーソナルカラーを発見。自分らしさを再確認しよう。</p>
                     <div class="diagnosis-meta">
-                        <span class="coming-soon">🚧 近日公開</span>
+                        <span class="badge coming-soon">🚧 近日公開</span>
                         <span>約3分で完了</span>
                     </div>
                 </div>
 
                 <!-- ライフスタイル診断 -->
                 <div class="diagnosis-card" style="opacity: 0.7; cursor: not-allowed;">
-                    <div class="diagnosis-header" style="background: linear-gradient(135deg, #eab308, #f59e0b);">🌟</div>
+                    <div class="diagnosis-header" style="background: linear-gradient(135deg, #eab308, #f59e0b);">
+                        <span>🌟</span>
+                    </div>
                     <h3 class="diagnosis-title">ライフスタイル診断</h3>
-                    <p class="diagnosis-desc">あなたにぴったりの生活スタイルを発見</p>
+                    <p class="diagnosis-desc">あなたにぴったりの生活スタイルを発見。毎日を豊かにするヒントが見つかる。</p>
                     <div class="diagnosis-meta">
-                        <span class="coming-soon">🚧 近日公開</span>
+                        <span class="badge coming-soon">🚧 近日公開</span>
+                        <span>約4分で完了</span>
+                    </div>
+                </div>
+
+                <!-- 友情タイプ診断 -->
+                <div class="diagnosis-card" style="opacity: 0.7; cursor: not-allowed;">
+                    <div class="diagnosis-header" style="background: linear-gradient(135deg, #10b981, #14b8a6);">
+                        <span>👭</span>
+                    </div>
+                    <h3 class="diagnosis-title">友情タイプ診断</h3>
+                    <p class="diagnosis-desc">あなたの友達との関係性を分析。より良い友情を築くヒントを提案。</p>
+                    <div class="diagnosis-meta">
+                        <span class="badge coming-soon">🚧 近日公開</span>
+                        <span>約5分で完了</span>
+                    </div>
+                </div>
+
+                <!-- 働き方診断 -->
+                <div class="diagnosis-card" style="opacity: 0.7; cursor: not-allowed;">
+                    <div class="diagnosis-header" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+                        <span>💼</span>
+                    </div>
+                    <h3 class="diagnosis-title">働き方診断</h3>
+                    <p class="diagnosis-desc">あなたに合った働き方を見つけよう。キャリアアップのヒントが満載。</p>
+                    <div class="diagnosis-meta">
+                        <span class="badge coming-soon">🚧 近日公開</span>
+                        <span>約4分で完了</span>
+                    </div>
+                </div>
+
+                <!-- 愛情表現診断 -->
+                <div class="diagnosis-card" style="opacity: 0.7; cursor: not-allowed;">
+                    <div class="diagnosis-header" style="background: linear-gradient(135deg, #ef4444, #ec4899);">
+                        <span>💝</span>
+                    </div>
+                    <h3 class="diagnosis-title">愛情表現診断</h3>
+                    <p class="diagnosis-desc">あなたの愛情表現のタイプを知る。パートナーとの関係改善に役立つ。</p>
+                    <div class="diagnosis-meta">
+                        <span class="badge coming-soon">🚧 近日公開</span>
+                        <span>約3分で完了</span>
+                    </div>
+                </div>
+
+                <!-- ストレスタイプ診断 -->
+                <div class="diagnosis-card" style="opacity: 0.7; cursor: not-allowed;">
+                    <div class="diagnosis-header" style="background: linear-gradient(135deg, #14b8a6, #06b6d4);">
+                        <span>😌</span>
+                    </div>
+                    <h3 class="diagnosis-title">ストレスタイプ診断</h3>
+                    <p class="diagnosis-desc">あなたのストレス耐性と対処法を分析。メンタルヘルスに役立つ。</p>
+                    <div class="diagnosis-meta">
+                        <span class="badge coming-soon">🚧 近日公開</span>
+                        <span>約6分で完了</span>
+                    </div>
+                </div>
+
+                <!-- 適職診断 -->
+                <div class="diagnosis-card" style="opacity: 0.7; cursor: not-allowed;">
+                    <div class="diagnosis-header" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
+                        <span>🎯</span>
+                    </div>
+                    <h3 class="diagnosis-title">適職診断</h3>
+                    <p class="diagnosis-desc">あなたに合った職業を見つけよう。転職やキャリア選択に役立つ。</p>
+                    <div class="diagnosis-meta">
+                        <span class="badge coming-soon">🚧 近日公開</span>
+                        <span>約7分で完了</span>
+                    </div>
+                </div>
+
+                <!-- コミュニケーションスタイル診断 -->
+                <div class="diagnosis-card" style="opacity: 0.7; cursor: not-allowed;">
+                    <div class="diagnosis-header" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);">
+                        <span>💬</span>
+                    </div>
+                    <h3 class="diagnosis-title">コミュニケーションスタイル診断</h3>
+                    <p class="diagnosis-desc">あなたの伝え方のクセを分析。人間関係改善に役立つヒント。</p>
+                    <div class="diagnosis-meta">
+                        <span class="badge coming-soon">🚧 近日公開</span>
                         <span>約4分で完了</span>
                     </div>
                 </div>
@@ -142,13 +318,14 @@
         </main>
 
         <footer class="footer">
-            <p>💕 現在は恋愛コミュニケーション診断をご利用いただけます</p>
-            <p>
-                <a href="https://github.com/utage-jpg/love-communication" style="color: #3b82f6;">
+            <p class="text-lg mb-4">💕 現在は恋愛コミュニケーション診断をご利用いただけます</p>
+            <p class="mb-4">
+                <a href="https://github.com/utage-jpg/love-communication" 
+                   class="text-blue-500 hover:text-blue-600 underline transition-colors">
                     GitHubで開発状況を見る
                 </a>
             </p>
-            <p style="font-size: 0.875rem; color: #999; margin-top: 1rem;">
+            <p class="text-sm text-gray-500">
                 © 2024 うらないの森. All rights reserved.
             </p>
         </footer>
