@@ -1,20 +1,51 @@
 {
   "pages": {
-    "/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
-    ],
     "/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/layout.css",
-      "static/chunks/app/layout.js"
+      "static/chunks/webpack-8becc61ad0ab6cf8.js",
+      "static/chunks/fd9d1056-9200b628bfbdc6da.js",
+      "static/chunks/596-2a20cb8d8073b504.js",
+      "static/chunks/main-app-1a56fbc89db19c6e.js",
+      "static/css/42d1b69c90f92ce7.css",
+      "static/chunks/app/layout-2f2f326a1af4c6d9.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-8becc61ad0ab6cf8.js",
+      "static/chunks/fd9d1056-9200b628bfbdc6da.js",
+      "static/chunks/596-2a20cb8d8073b504.js",
+      "static/chunks/main-app-1a56fbc89db19c6e.js",
+      "static/chunks/176-9be302116a2af18e.js",
+      "static/chunks/app/page-10dd81695f0787a0.js"
     ],
     "/diagnoses/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/diagnoses/page.js"
+      "static/chunks/webpack-8becc61ad0ab6cf8.js",
+      "static/chunks/fd9d1056-9200b628bfbdc6da.js",
+      "static/chunks/596-2a20cb8d8073b504.js",
+      "static/chunks/main-app-1a56fbc89db19c6e.js",
+      "static/chunks/176-9be302116a2af18e.js",
+      "static/chunks/app/diagnoses/page-267bb9be1b8aae0c.js"
+    ],
+    "/result/page": [
+      "static/chunks/webpack-8becc61ad0ab6cf8.js",
+      "static/chunks/fd9d1056-9200b628bfbdc6da.js",
+      "static/chunks/596-2a20cb8d8073b504.js",
+      "static/chunks/main-app-1a56fbc89db19c6e.js",
+      "static/chunks/176-9be302116a2af18e.js",
+      "static/chunks/app/result/page-12fc960e741c92d5.js"
+    ],
+    "/diagnosis/page": [
+      "static/chunks/webpack-8becc61ad0ab6cf8.js",
+      "static/chunks/fd9d1056-9200b628bfbdc6da.js",
+      "static/chunks/596-2a20cb8d8073b504.js",
+      "static/chunks/main-app-1a56fbc89db19c6e.js",
+      "static/chunks/app/diagnosis/page-99729dde34bebafa.js"
+    ],
+    "/diagnosis/[id]/page": [
+      "static/chunks/webpack-8becc61ad0ab6cf8.js",
+      "static/chunks/fd9d1056-9200b628bfbdc6da.js",
+      "static/chunks/596-2a20cb8d8073b504.js",
+      "static/chunks/main-app-1a56fbc89db19c6e.js",
+      "static/chunks/176-9be302116a2af18e.js",
+      "static/chunks/app/diagnosis/[id]/page-6307093602c0cc05.js"
     ]
   }
 }
