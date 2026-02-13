@@ -19,15 +19,28 @@
     <!-- トップページ -->
     <div id="homePage" class="flex items-center justify-center min-h-screen p-4">
         <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center fade-in">
-            <h1 class="text-3xl font-bold text-gray-800 mb-4">
-                恋愛コミュニケーション診断
-            </h1>
-            <p class="text-gray-600 mb-8">
-                20問の質問に答えて、あなたの恋愛コミュニケーションスタイルを診断しましょう！
-            </p>
-            <button onclick="startDiagnosis()" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
-                診断を始める
+            <div class="mb-6">
+                <div class="text-4xl mb-4">💕🎵🔧💕🛡️</div>
+                <h1 class="text-3xl font-bold text-gray-800 mb-4">
+                    恋愛コミュニケーション診断
+                </h1>
+                <p class="text-gray-600 mb-4">
+                    20問で分かる！あなたの恋愛キャラは？
+                </p>
+                <div class="bg-pink-50 rounded-lg p-4 mb-4">
+                    <p class="text-sm text-pink-600 font-medium">
+                        🎯 診断結果は推しキャラになれる！<br>
+                        📱 シェアで盛り上がろう！<br>
+                        💕 あなたに似たタイプが集まる場所
+                    </p>
+                </div>
+            </div>
+            <button onclick="startDiagnosis()" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 mb-3">
+                🎭 診断を始める
             </button>
+            <p class="text-xs text-gray-500">
+                #恋愛診断 #推しキャラ #わかる人集まれ
+            </p>
         </div>
     </div>
 
@@ -62,10 +75,10 @@
 
                 <!-- 回答ボタン -->
                 <div class="grid grid-cols-2 gap-4 mb-6">
-                    <button onclick="answer(true)" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200">
+                    <button id="yesButton" onclick="answer(true)" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200">
                         YES
                     </button>
-                    <button onclick="answer(false)" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200">
+                    <button id="noButton" onclick="answer(false)" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200">
                         NO
                     </button>
                 </div>
@@ -82,25 +95,46 @@
     <div id="resultPage" class="hidden">
         <div class="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 py-8 px-4">
             <div class="max-w-2xl mx-auto">
-                <!-- 結果ヘッダー -->
+                <!-- キャラクターカード -->
                 <div class="bg-white rounded-lg shadow-lg p-8 mb-6 text-center fade-in">
-                    <h1 class="text-3xl font-bold text-gray-800 mb-4">
-                        診断結果
-                    </h1>
                     <div class="mb-6">
-                        <h2 id="resultType" class="text-2xl font-bold text-pink-600 mb-2">
+                        <div id="characterEmoji" class="text-6xl mb-4">🎵</div>
+                        <h1 id="characterName" class="text-3xl font-bold mb-2">キャラクター名</h1>
+                        <h2 id="resultType" class="text-xl font-bold text-gray-600 mb-4">
                             タイプ名
                         </h2>
-                        <p id="resultDescription" class="text-gray-600 leading-relaxed">
+                        <p id="resultDescription" class="text-gray-600 leading-relaxed mb-4">
                             説明文
                         </p>
+                        <div class="bg-pink-50 rounded-lg p-4 mb-4">
+                            <p id="characterCatchphrase" class="text-lg font-medium text-pink-600 italic">
+                                "キャッチフレーズ"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- キャラクター詳細 -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-6 fade-in">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        🎭 キャラクター詳細
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <span class="font-medium text-gray-700">性格：</span>
+                            <p id="characterPersonality" class="text-gray-600">性格説明</p>
+                        </div>
+                        <div>
+                            <span class="font-medium text-gray-700">恋愛スタイル：</span>
+                            <p id="characterLoveStyle" class="text-gray-600">恋愛スタイル説明</p>
+                        </div>
                     </div>
                 </div>
 
                 <!-- スコア表示 -->
                 <div class="bg-white rounded-lg shadow-lg p-8 mb-6 fade-in">
                     <h3 class="text-xl font-bold text-gray-800 mb-6">
-                        スコアサマリー
+                        📊 通信プロトコル分析
                     </h3>
                     <div id="scoreBars"></div>
                 </div>
@@ -108,15 +142,31 @@
                 <!-- アドバイス -->
                 <div class="bg-white rounded-lg shadow-lg p-8 mb-6 fade-in">
                     <h3 class="text-xl font-bold text-gray-800 mb-6">
-                        解決パッチ（アドバイス）
+                        💡 恋愛通信改善パッチ
                     </h3>
                     <ul id="adviceList" class="space-y-3"></ul>
+                </div>
+
+                <!-- SNSシェア -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-6 fade-in">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        📱 シェアして推しを広げよう！
+                    </h3>
+                    <textarea id="shareText" readonly class="w-full p-4 border border-gray-300 rounded-lg text-sm bg-gray-50" rows="6"></textarea>
+                    <div class="mt-4 flex gap-2">
+                        <button onclick="copyShareText()" class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
+                            📋 コピー
+                        </button>
+                        <button onclick="shareOnTwitter()" class="flex-1 bg-sky-500 hover:bg-sky-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
+                            🐦 Xでシェア
+                        </button>
+                    </div>
                 </div>
 
                 <!-- アクションボタン -->
                 <div class="text-center fade-in">
                     <button onclick="resetDiagnosis()" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
-                        もう一度診断する
+                        🔄 もう一度診断する
                     </button>
                 </div>
             </div>
@@ -170,24 +220,40 @@
 
         // 診断開始
         function startDiagnosis() {
+            console.log('診断開始ボタンがクリックされました');
             currentQuestionIndex = 0;
             answers = [];
+            console.log('診断ページに移動します');
             showPage('diagnosisPage');
             updateQuestion();
         }
 
         // 質問更新
         function updateQuestion() {
+            console.log('質問を更新します。現在のインデックス:', currentQuestionIndex);
             const question = questions[currentQuestionIndex];
+            console.log('質問データ:', question);
+            
             document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
             document.getElementById('currentCategory').textContent = question.category;
             document.getElementById('questionNumber').textContent = question.id;
             document.getElementById('questionText').textContent = question.text;
             
+            // 進捗バー更新
             const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
             document.getElementById('progressBar').style.width = progress + '%';
             
-            document.getElementById('backButton').classList.toggle('hidden', currentQuestionIndex === 0);
+            // 戻るボタン表示制御
+            const backButton = document.getElementById('backButton');
+            if (currentQuestionIndex > 0) {
+                backButton.classList.remove('hidden');
+            } else {
+                backButton.classList.add('hidden');
+            }
+            
+            // ボタンリセット
+            document.getElementById('yesButton').disabled = false;
+            document.getElementById('noButton').disabled = false;
         }
 
         // 回答処理
@@ -250,6 +316,53 @@
             return 'unclassified';
         }
 
+        // キャラクター情報取得
+        function getCharacterInfo(type) {
+            const characters = {
+                independent: {
+                    name: 'ユウト',
+                    emoji: '🎵',
+                    color: '#3B82F6',
+                    personality: 'マイペースで自由人。音楽が好きで、一人の時間を大切にする。',
+                    catchphrase: 'まあ、気楽にいこうよ！',
+                    loveStyle: '連絡は少なめでも、会うときは全力で楽しむタイプ',
+                    twitterBio: '🎵 音信不通だけど好きだよ｜マイペース恋愛担当',
+                    hashtags: ['#マイペース彼氏', '#自由人恋愛', '#連絡下手']
+                },
+                practical: {
+                    name: 'ケンジ',
+                    emoji: '🔧',
+                    color: '#10B981',
+                    personality: '実直で誠実。言葉より行動で示すタイプ。',
+                    catchphrase: '何か困ったことがあったら言ってね',
+                    loveStyle: 'プレゼントや手伝いなど、具体的な行動で愛情を表現',
+                    twitterBio: '🔧 言葉より行動で好きを伝える｜実直担当',
+                    hashtags: ['#実直彼氏', '#行動派恋愛', '#誠実さん']
+                },
+                empathetic: {
+                    name: 'ハル',
+                    emoji: '💕',
+                    color: '#EC4899',
+                    personality: '感情豊かで共感力が高い。スキンシップが好き。',
+                    catchphrase: '今の気持ち、教えてくれると嬉しいな',
+                    loveStyle: '毎日の連絡と感情の共有を大切にする甘えん坊タイプ',
+                    twitterBio: '💕 毎日連絡してほしい｜共感担当',
+                    hashtags: ['#甘えん坊彼氏', '#共感さん', '#濃厚愛']
+                },
+                avoidant: {
+                    name: 'リョウ',
+                    emoji: '🛡️',
+                    color: '#6B7280',
+                    personality: 'シャイで慎重。衝突を避ける平和主義者。',
+                    catchphrase: 'また今度でいいかな…',
+                    loveStyle: '喧嘩を避けて、穏やかな関係を保とうとする',
+                    twitterBio: '🛡️ 喧嘩は嫌いだな…｜回避担当',
+                    hashtags: ['#シャイ彼氏', '#喧嘩嫌い', '#平和主義']
+                }
+            };
+            return characters[type] || characters.independent;
+        }
+
         // タイプ情報取得
         function getTypeInfo(type) {
             const types = {
@@ -304,11 +417,21 @@
         function showResult() {
             const type = getDiagnosisType();
             const typeInfo = getTypeInfo(type);
+            const character = getCharacterInfo(type);
             const scores = getScores();
             const advice = getAdvice(type);
 
+            // キャラクター情報を表示
+            document.getElementById('characterEmoji').textContent = character.emoji;
+            document.getElementById('characterName').textContent = character.name;
+            document.getElementById('characterName').style.color = character.color;
             document.getElementById('resultType').textContent = typeInfo.name;
             document.getElementById('resultDescription').textContent = typeInfo.description;
+            
+            // キャラクター詳細
+            document.getElementById('characterPersonality').textContent = character.personality;
+            document.getElementById('characterCatchphrase').textContent = `"${character.catchphrase}"`;
+            document.getElementById('characterLoveStyle').textContent = character.loveStyle;
 
             // スコアバー生成
             const scoreBars = document.getElementById('scoreBars');
@@ -338,6 +461,10 @@
                 </li>
             `).join('');
 
+            // SNSシェア用テキスト生成
+            const shareText = `【恋愛コミュニケーション診断】\n私のタイプは${typeInfo.name}！\n推しキャラは${character.name}${character.emoji}\n${character.catchphrase}\n\n${character.twitterBio}\n${character.hashtags.join(' ')}`;
+            document.getElementById('shareText').value = shareText;
+
             showPage('resultPage');
         }
 
@@ -356,6 +483,33 @@
         // リセット
         function resetDiagnosis() {
             showPage('homePage');
+        }
+
+        // SNSシェア機能
+        function copyShareText() {
+            const shareText = document.getElementById('shareText');
+            shareText.select();
+            document.execCommand('copy');
+            
+            // コピー完了のフィードバック
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = '✅ コピー完了！';
+            button.classList.add('bg-green-500', 'hover:bg-green-600');
+            button.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('bg-green-500', 'hover:bg-green-600');
+                button.classList.add('bg-blue-500', 'hover:bg-blue-600');
+            }, 2000);
+        }
+
+        function shareOnTwitter() {
+            const shareText = document.getElementById('shareText').value;
+            const encodedText = encodeURIComponent(shareText);
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodedText}`;
+            window.open(twitterUrl, '_blank', 'width=600,height=400');
         }
     </script>
 </body>
