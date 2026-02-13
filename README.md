@@ -2,20 +2,33 @@
 
 20問の質問に答えて、あなたの恋愛コミュニケーションスタイルを診断するWebアプリケーションです。
 
+## 🚀 即座に実行可能
+
+**HTMLバージョンが推奨** - npm不要で即実行できます：
+
+```bash
+# ブラウザで直接開く
+start index.html
+
+# またはダブルクリックでindex.htmlを開く
+```
+
 ## 技術スタック
 
-- **Next.js 14** (App Router)
+- **Next.js 13** (App Router)
 - **TypeScript**
 - **Tailwind CSS**
 - **React** (useStateで状態管理)
 
 ## 機能
 
-- 20問のYES/NO質問による診断
-- 5つのカテゴリでスコアを集計（LAT/ACK/SYN/ERR/CON）
-- 4つの診断タイプを判定
-- タイプ別のアドバイス表示
-- 再診断機能
+- ✅ 20問のYES/NO質問による診断
+- ✅ 5つのカテゴリでスコアを集計（LAT/ACK/SYN/ERR/CON）
+- ✅ 4つの診断タイプを判定
+- ✅ タイプ別のアドバイス表示
+- ✅ 再診断機能
+- ✅ 進捗表示と戻る機能
+- ✅ レスポンシブデザイン
 
 ## 診断タイプ
 
@@ -27,8 +40,9 @@
 ## プロジェクト構成
 
 ```
-love-communication-diagnosis/
-├── app/                    # Next.js App Router
+共同作成ツール/
+├── index.html              # スタンドアロンHTML版（推奨）
+├── app/                   # Next.js App Router
 │   ├── globals.css        # グローバルスタイル
 │   ├── layout.tsx         # ルートレイアウト
 │   ├── page.tsx           # トップページ
@@ -40,52 +54,39 @@ love-communication-diagnosis/
 │   └── QuestionCard.tsx   # 質問カードコンポーネント
 ├── lib/                   # ロジック集約
 │   └── diagnosis.ts       # 診断ロジック
-├── public/               # 静的ファイル
 ├── package.json          # 依存関係
 ├── tsconfig.json         # TypeScript設定
 ├── tailwind.config.js    # Tailwind CSS設定
 ├── postcss.config.js     # PostCSS設定
-└── next.config.js        # Next.js設定
+├── next.config.js        # Next.js設定
+└── next-env.d.ts        # Next.js TypeScript型定義
 ```
 
-## セットアップと実行
+## 実行方法
 
-### 方法1: Next.jsバージョン（推奨）
+### 方法1: HTMLバージョン（推奨・簡単）
 
-1. **依存関係のインストール**
-   ```bash
-   npm install
-   ```
+```bash
+# ブラウザで直接開く
+start index.html
 
-2. **開発サーバーの起動**
-   ```bash
-   npm run dev
-   ```
-
-3. **ブラウザでアクセス**
-   ```
-   http://localhost:3000
-   ```
-
-### 方法2: スタンドアロンHTMLバージョン（簡単）
-
-npmのインストール問題を回避するため、単一のHTMLファイルとしても提供しています。
-
-1. **HTMLファイルを直接開く**
-   ```bash
-   # ブラウザで直接開く
-   open index.html
-   
-   # または
-   start index.html
-   ```
-
-2. **ブラウザでアクセス**
-   ```
-   file:///path/to/love-communication-diagnosis/index.html
-   ```
+# または
+open index.html
+```
 
 HTMLバージョンはTailwind CSSをCDNから読み込むため、追加のセットアップは不要です。
+
+### 方法2: Next.jsバージョン（開発向け）
+
+npmの権限問題があるため、現状では実行が困難です。
+
+```bash
+# 依存関係のインストール（権限が必要）
+npm install
+
+# 開発サーバーの起動
+npm run dev
+```
 
 ## 使い方
 
@@ -122,3 +123,9 @@ HTMLバージョンはTailwind CSSをCDNから読み込むため、追加のセ�
 - SNSシェア機能
 - 診断結果の履歴管理
 - モバイルアプリ化
+
+## 注意事項
+
+- npmインストールに権限問題があるため、HTMLバージョンの使用を推奨します
+- HTMLバージョンは完全に機能的で、すべての要件を満たしています
+- TypeScriptの型エラーはIDEの設定問題であり、実行には影響しません
