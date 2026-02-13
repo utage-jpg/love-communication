@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>うらないの森 - 診断ポータルサイト</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fce7f3 0%, #f3e8ff 50%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .title {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        .subtitle {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        .diagnosis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .diagnosis-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+        .diagnosis-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0.15);
+        }
+        .diagnosis-header {
+            height: 120px;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .diagnosis-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        .diagnosis-desc {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        .diagnosis-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+            color: #999;
+        }
+        .available {
+            color: #10b981;
+        }
+        .coming-soon {
+            color: #6b7280;
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            border-top: 1px solid #e5e7eb;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">🌟 うらないの森</h1>
+            <p class="subtitle">心を開く、自分を知る、未来を見つける</p>
+        </header>
+
+        <main>
+            <div class="diagnosis-grid">
+                <!-- 恋愛コミュニケーション診断 -->
+                <a href="../index.html" class="diagnosis-card">
+                    <div class="diagnosis-header">💕</div>
+                    <h3 class="diagnosis-title">恋愛コミュニケーション診断</h3>
+                    <p class="diagnosis-desc">20問で分かる！あなたの恋愛キャラは？</p>
+                    <div class="diagnosis-meta">
+                        <span class="available">✅ 利用可能</span>
+                        <span>約5分で完了</span>
+                    </div>
+                </a>
+
+                <!-- 性格カラー診断 -->
+                <div class="diagnosis-card" style="opacity: 0.7; cursor: not-allowed;">
+                    <div class="diagnosis-header" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);">🎨</div>
+                    <h3 class="diagnosis-title">性格カラー診断</h3>
+                    <p class="diagnosis-desc">あなたの内面を彩るパーソナルカラー</p>
+                    <div class="diagnosis-meta">
+                        <span class="coming-soon">🚧 近日公開</span>
+                        <span>約3分で完了</span>
+                    </div>
+                </div>
+
+                <!-- ライフスタイル診断 -->
+                <div class="diagnosis-card" style="opacity: 0.7; cursor: not-allowed;">
+                    <div class="diagnosis-header" style="background: linear-gradient(135deg, #eab308, #f59e0b);">🌟</div>
+                    <h3 class="diagnosis-title">ライフスタイル診断</h3>
+                    <p class="diagnosis-desc">あなたにぴったりの生活スタイルを発見</p>
+                    <div class="diagnosis-meta">
+                        <span class="coming-soon">🚧 近日公開</span>
+                        <span>約4分で完了</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>💕 現在は恋愛コミュニケーション診断をご利用いただけます</p>
+            <p>
+                <a href="https://github.com/utage-jpg/love-communication" style="color: #3b82f6;">
+                    GitHubで開発状況を見る
+                </a>
+            </p>
+            <p style="font-size: 0.875rem; color: #999; margin-top: 1rem;">
+                © 2024 うらないの森. All rights reserved.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
