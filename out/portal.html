@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>うらないの森 - 診断ポータルサイト</title>
+    <meta name="description" content="心を開く、自分を知る、未来を見つける">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 min-h-screen">
+    <div class="text-center py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="fade-in">
+                <h1 class="text-5xl md:text-7xl font-bold gradient-text mb-6">
+                    うらないの森
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 mb-8">
+                    心を開く、自分を知る、未来を見つける
+                </p>
+                
+                <div class="mb-12">
+                    <a href="index.html" class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full hover:shadow-xl hover:scale-105">
+                        <span class="mr-2">✨</span>
+                        恋愛診断をはじめる
+                        <span class="ml-2">→</span>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 overflow-hidden">
+                        <div class="h-32 bg-gradient-to-br from-pink-400 to-purple-500 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-white/20 backdrop-blur-sm"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span class="text-6xl">💕</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">恋愛コミュニケーション診断</h3>
+                            <p class="text-gray-600 mb-4">20問で分かる！あなたの恋愛キャラは？</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-500">約5分で完了</span>
+                                <a href="index.html" class="text-pink-500 hover:text-pink-600 font-medium">はじめる →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 overflow-hidden opacity-60">
+                        <div class="h-32 bg-gradient-to-br from-blue-400 to-cyan-500 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-white/20 backdrop-blur-sm"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span class="text-6xl">🎨</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">性格カラー診断</h3>
+                            <p class="text-gray-600 mb-4">あなたの内面を彩るパーソナルカラー</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-500">約3分で完了</span>
+                                <span class="text-gray-400">近日公開</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 overflow-hidden opacity-60">
+                        <div class="h-32 bg-gradient-to-br from-yellow-400 to-orange-500 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-white/20 backdrop-blur-sm"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span class="text-6xl">🌟</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">ライフスタイル診断</h3>
+                            <p class="text-gray-600 mb-4">あなたにぴったりの生活スタイルを発見</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-500">約4分で完了</span>
+                                <span class="text-gray-400">近日公開</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-gray-600 mb-4">
+                        💕 現在は恋愛コミュニケーション診断をご利用いただけます
+                    </p>
+                    <a href="https://github.com/utage-jpg/love-communication" class="text-blue-500 hover:text-blue-600 underline">
+                        GitHubで開発状況を見る
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

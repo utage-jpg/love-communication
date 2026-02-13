@@ -76,7 +76,7 @@ module.exports = require("next/dist/shared/lib/app-router-context");
 
 /***/ }),
 
-/***/ 3685:
+/***/ 199:
 /***/ ((module) => {
 
 "use strict";
@@ -230,7 +230,7 @@ const tree = {
         }]
       },
         {
-        
+        'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 4515)), "C:\\Users\\naoya tomizawa\\OneDrive\\VScode\\共同作成ツール\\app\\diagnoses\\layout.tsx"],
         
       }
       ]
@@ -278,6 +278,13 @@ const routeModule = new AppPageRouteModule({
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 8747))
+
+/***/ }),
+
+/***/ 5303:
+/***/ (() => {
+
+
 
 /***/ }),
 
@@ -666,6 +673,21 @@ function DiagnosesPage() {
 
 /***/ }),
 
+/***/ 4515:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ DiagnosesLayout)
+/* harmony export */ });
+function DiagnosesLayout({ children }) {
+    return children;
+}
+
+
+/***/ }),
+
 /***/ 7150:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -699,7 +721,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [500,440,298,654], () => (__webpack_exec__(805)));
+var __webpack_exports__ = __webpack_require__.X(0, [500,440,353], () => (__webpack_exec__(805)));
 module.exports = __webpack_exports__;
 
 })();
